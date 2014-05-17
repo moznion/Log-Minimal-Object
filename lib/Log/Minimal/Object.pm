@@ -31,14 +31,12 @@ sub new {
 }
 
 sub AUTOLOAD {
-    my ($self) = @_;
-
     my @namespaces  = split /::/, $AUTOLOAD;
     my $method_name = $namespaces[-1];
     if (my $meth = Log::Minimal->can($method_name)) {
         no strict "refs"; ## no critic
         *{$AUTOLOAD} = sub {
-            shift;
+            my $self = shift;
             local $Log::Minimal::COLOR             = $self->{color};
             local $Log::Minimal::AUTODUMP          = $self->{autodump};
             local $Log::Minimal::TRACE_LEVEL       = $self->{trace_level};
