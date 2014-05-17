@@ -31,8 +31,7 @@ sub new {
 }
 
 sub AUTOLOAD {
-    my @namespaces  = split /::/, $AUTOLOAD;
-    my $method_name = $namespaces[-1];
+    my $method_name = (split /::/, $AUTOLOAD)[-1];
     if (my $meth = Log::Minimal->can($method_name)) {
         no strict "refs"; ## no critic
         *{$AUTOLOAD} = sub {
