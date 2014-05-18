@@ -2,11 +2,9 @@ package Log::Minimal::Object;
 use 5.008005;
 use strict;
 use warnings;
-use Carp ();
 use Log::Minimal ();
 
 our $VERSION = "0.01";
-our $AUTOLOAD;
 
 use constant {
     ORIGINAL_PRINT => $Log::Minimal::PRINT,
@@ -18,55 +16,45 @@ sub new {
 
     my %args = scalar @_ == 1 ? %{$_[0]} : @_;
 
-    for my $key (keys %Log::Minimal::Object::) {
-        if ($key =~ /\A[a-z]/ && $key ne 'new' && $key ne 'import') { # XXX
-            delete $Log::Minimal::Object::{$key};
-        }
-    }
-
     bless {
-        color => $args{color} || 0,
-        die => $args{die} || 0,
-        print => $args{print} || 0,
-        autodump => $args{autodump} || 0,
-        trace_level => $args{trace_level} || 1,
-        log_level => $args{log_level} || 'DEBUG',
+        color             => $args{color} || 0,
+        die               => $args{die} || 0,
+        print             => $args{print} || 0,
+        autodump          => $args{autodump} || 0,
+        trace_level       => $args{trace_level} || 2,
+        log_level         => $args{log_level} || 'DEBUG',
         escape_whitespace => $args{escape_whitespace} || 0,
     }, $class;
 }
 
-sub AUTOLOAD {
-    my $method_name = (split /::/, $AUTOLOAD)[-1];
-    if (my $meth = Log::Minimal->can($method_name)) {
-        no strict "refs"; ## no critic
-        *{$AUTOLOAD} = sub {
-            my $self = shift;
-            local $Log::Minimal::COLOR             = $self->{color};
-            local $Log::Minimal::AUTODUMP          = $self->{autodump};
-            local $Log::Minimal::TRACE_LEVEL       = $self->{trace_level};
-            local $Log::Minimal::LOG_LEVEL         = $self->{log_level};
-            local $Log::Minimal::ESCAPE_WHITESPACE = $self->{escape_whitespace};
+sub critf   { shift->_log('critf',   @_) }
+sub warnf   { shift->_log('warnf',   @_) }
+sub infof   { shift->_log('infof',   @_) }
+sub debugf  { shift->_log('debugf',  @_) }
+sub critff  { shift->_log('critff',  @_) }
+sub warnff  { shift->_log('warnff',  @_) }
+sub infoff  { shift->_log('infoff',  @_) }
+sub debugff { shift->_log('debugff', @_) }
+sub croakf  { shift->_log('croakf',  @_) }
+sub croakff { shift->_log('croakff', @_) }
+sub ddf     { shift->_log('ddf',     @_) }
 
-            local $Log::Minimal::DIE = ORIGINAL_DIE;
-            if (my $die = $self->{die}) {
-                $Log::Minimal::DIE = $die;
-            }
+sub _log {
+    my $self = shift;
+    my $meth = shift;
 
-            local $Log::Minimal::PRINT = ORIGINAL_PRINT;
-            if (my $print = $self->{print}) {
-                $Log::Minimal::PRINT = $print;
-            }
+    local $Log::Minimal::COLOR             = $self->{color};
+    local $Log::Minimal::AUTODUMP          = $self->{autodump};
+    local $Log::Minimal::TRACE_LEVEL       = $self->{trace_level};
+    local $Log::Minimal::LOG_LEVEL         = $self->{log_level};
+    local $Log::Minimal::ESCAPE_WHITESPACE = $self->{escape_whitespace};
 
-            $meth->(@_);
-        };
-        goto &$AUTOLOAD;
-    }
-    else {
-        Carp::croak qq{Can't call method "$method_name" which has not been defined in Log::Minimal};
-    }
+    local $Log::Minimal::DIE   = $self->{die}   ? $self->{die}   : ORIGINAL_DIE;
+    local $Log::Minimal::PRINT = $self->{print} ? $self->{print} : ORIGINAL_PRINT;
+
+    $self->{$meth} ||= Log::Minimal->can($meth);
+    $self->{$meth}->(@_);
 }
-
-sub DESTROY {}
 
 1;
 __END__

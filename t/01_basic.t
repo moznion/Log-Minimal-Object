@@ -31,14 +31,14 @@ subtest 'Methods of Log::Minimal should work well' => sub {
 subtest 'Undefined method of Log::Minimal should die' => sub {
     my $logger = Log::Minimal::Object->new;
     eval { $logger->undefined_method };
-    like $@, qr/Can't call method "undefined_method" which has not been defined in Log::Minimal/
+    ok $@;
 };
 
 subtest 'Configurations should work right' => sub {
     subtest 'decorated logger' => sub {
         my $logger = Log::Minimal::Object->new(
             color             => 1,
-            trace_level       => 2,
+            trace_level       => 3,
             escape_whitespace => 1,
             log_level         => 'WARN',
         );
