@@ -104,17 +104,17 @@ Creates the instance. This method receives arguments to configure as hash or has
         log_level => 'WARN',
     );
 
-Please refer to the L<CONFIGURATIONS> to know details of configurable items.
+Please refer to the L</CONFIGURATIONS> to know details of configurable items.
 
 =back
 
 =head1 INSTANCE METHODS
 
-Instance of this module provides the methods that are defined in the L<Log::Minimal> (e.g. infof, warnf, and etc).
+Instance of this module provides the methods that are defined in the L<Log::Minimal/EXPORT FUNCTIONS> (e.g. infof, warnf, and etc).
 
 =head1 CONFIGURATIONS
 
-The configurable keys and its relations are follows (please see also L<Log::Minimal> to get information of C<$Log::Minimal::*>):
+The configurable keys and its relations are follows (please see also L<Log::Minimal/CUSTOMIZE> to get information of C<$Log::Minimal::*>):
 
 =over 4
 
