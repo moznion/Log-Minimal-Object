@@ -75,15 +75,82 @@ __END__
 
 =head1 NAME
 
-Log::Minimal::Object - It's new $module
+Log::Minimal::Object - Provides the OOP interface of Log::Minimal
 
 =head1 SYNOPSIS
 
     use Log::Minimal::Object;
 
+    my $logger = Log::Minimal::Object->new();
+    $logger->infof("This is info!"); # => 2014-05-18T17:24:02 [INFO] This is info! at eg/sample.pl line 13
+    $logger->warnf("This is warn!"); # => 2014-05-18T17:24:02 [WARN] This is warn! at eg/sample.pl line 14
+
 =head1 DESCRIPTION
 
-Log::Minimal::Object is ...
+Log::Minimal::Object is the simple wrapper to provide the OOP interface of L<Log::Minimal>.
+
+This module can have and apply independent settings for each instance, it's intuitive!
+
+=head1 CLASS METHODS
+
+=over 4
+
+=item * Log::Minimal::Object->new(%arg | \%arg)
+
+Creates the instance. This method receives arguments to configure as hash or hashref, like so;
+
+    my $logger = Log::Minimal::Object->new(
+        color     => 1,
+        log_level => 'WARN',
+    );
+
+Please refer to the L<CONFIGURATIONS> to know details of configurable items.
+
+=back
+
+=head1 INSTANCE METHODS
+
+Instance of this module provides the methods that are defined in the L<Log::Minimal> (e.g. infof, warnf, and etc).
+
+=head1 CONFIGURATIONS
+
+The configurable keys and its relations are follows (please see also L<Log::Minimal> to get information of C<$Log::Minimal::*>):
+
+=over 4
+
+=item * color
+
+C<$Log::Minimal::COLOR>
+
+=item * autodump
+
+C<$Log::Minimal::AUTODUMP>
+
+=item * trace_level
+
+C<$Log::Minimal::TRACE_LEVEL>
+
+=item * log_level
+
+C<$Log::Minimal::LOG_LEVEL>
+
+=item * escape_whitespace
+
+C<$Log::Minimal::ESCAPE_WHITESPACE>
+
+=item * print
+
+C<$Log::Minimal::PRINT>
+
+=item * die
+
+C<$Log::Minimal::DIE>
+
+=back
+
+=head1 SEE ALSO
+
+L<Log::Minimal>
 
 =head1 LICENSE
 
