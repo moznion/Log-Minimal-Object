@@ -18,8 +18,8 @@ sub new {
 
     bless {
         color             => $args{color} || 0,
-        die               => $args{die} || 0,
-        print             => $args{print} || 0,
+        die               => $args{die} || ORIGINAL_DIE,
+        print             => $args{print} || ORIGINAL_PRINT,
         autodump          => $args{autodump} || 0,
         trace_level       => $args{trace_level} || 2,
         log_level         => $args{log_level} || 'DEBUG',
@@ -47,10 +47,9 @@ sub _log {
     local $Log::Minimal::AUTODUMP          = $self->{autodump};
     local $Log::Minimal::TRACE_LEVEL       = $self->{trace_level};
     local $Log::Minimal::LOG_LEVEL         = $self->{log_level};
+    local $Log::Minimal::DIE               = $self->{die};
+    local $Log::Minimal::PRINT             = $self->{print};
     local $Log::Minimal::ESCAPE_WHITESPACE = $self->{escape_whitespace};
-
-    local $Log::Minimal::DIE   = $self->{die}   ? $self->{die}   : ORIGINAL_DIE;
-    local $Log::Minimal::PRINT = $self->{print} ? $self->{print} : ORIGINAL_PRINT;
 
     $self->{$meth} ||= Log::Minimal->can($meth);
     $self->{$meth}->(@_);
@@ -108,23 +107,23 @@ The configurable keys and its relations are follows (please see also L<Log::Mini
 
 =item * color
 
-C<$Log::Minimal::COLOR>
+C<$Log::Minimal::COLOR> (default: 0)
 
 =item * autodump
 
-C<$Log::Minimal::AUTODUMP>
+C<$Log::Minimal::AUTODUMP> (default: 0)
 
 =item * trace_level
 
-C<$Log::Minimal::TRACE_LEVEL>
+C<$Log::Minimal::TRACE_LEVEL> (default: 2)
 
 =item * log_level
 
-C<$Log::Minimal::LOG_LEVEL>
+C<$Log::Minimal::LOG_LEVEL> (default: 'DEBUG')
 
 =item * escape_whitespace
 
-C<$Log::Minimal::ESCAPE_WHITESPACE>
+C<$Log::Minimal::ESCAPE_WHITESPACE> (default: 0)
 
 =item * print
 
