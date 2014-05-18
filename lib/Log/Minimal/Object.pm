@@ -8,6 +8,11 @@ use Log::Minimal ();
 our $VERSION = "0.01";
 our $AUTOLOAD;
 
+use constant {
+    ORIGINAL_PRINT => $Log::Minimal::PRINT,
+    ORIGINAL_DIE   => $Log::Minimal::DIE,
+};
+
 sub new {
     my $class = shift;
 
@@ -24,7 +29,7 @@ sub new {
         die => $args{die} || 0,
         print => $args{print} || 0,
         autodump => $args{autodump} || 0,
-        trace_level => $args{trace_level} || 0,
+        trace_level => $args{trace_level} || 1,
         log_level => $args{log_level} || 'DEBUG',
         escape_whitespace => $args{escape_whitespace} || 0,
     }, $class;
@@ -42,12 +47,14 @@ sub AUTOLOAD {
             local $Log::Minimal::LOG_LEVEL         = $self->{log_level};
             local $Log::Minimal::ESCAPE_WHITESPACE = $self->{escape_whitespace};
 
+            local $Log::Minimal::DIE = ORIGINAL_DIE;
             if (my $die = $self->{die}) {
-                local $Log::Minimal::DIE = $die;
+                $Log::Minimal::DIE = $die;
             }
 
+            local $Log::Minimal::PRINT = ORIGINAL_PRINT;
             if (my $print = $self->{print}) {
-                local $Log::Minimal::PRINT = $print;
+                $Log::Minimal::PRINT = $print;
             }
 
             $meth->(@_);
