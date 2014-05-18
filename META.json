@@ -42,16 +42,29 @@
       },
       "runtime" : {
          "requires" : {
+            "Log::Minimal" : "0.18",
             "perl" : "5.008005"
          }
       },
       "test" : {
          "requires" : {
+            "Capture::Tiny" : "0",
             "Test::More" : "0.98"
          }
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/moznion/Log-Minimal-Object/issues"
+      },
+      "homepage" : "https://github.com/moznion/Log-Minimal-Object",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/moznion/Log-Minimal-Object.git",
+         "web" : "https://github.com/moznion/Log-Minimal-Object"
+      }
+   },
    "version" : "0.01",
    "x_authority" : "cpan:MOZNION"
 }
