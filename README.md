@@ -28,35 +28,35 @@ This module can have and apply independent settings for each instance, it's intu
             log_level => 'WARN',
         );
 
-    Please refer to the [CONFIGURATIONS](https://metacpan.org/pod/CONFIGURATIONS) to know details of configurable items.
+    Please refer to the ["CONFIGURATIONS"](#configurations) to know details of configurable items.
 
 # INSTANCE METHODS
 
-Instance of this module provides the methods that are defined in the [Log::Minimal](https://metacpan.org/pod/Log::Minimal) (e.g. infof, warnf, and etc).
+Instance of this module provides the methods that are defined in the ["EXPORT FUNCTIONS" in Log::Minimal](https://metacpan.org/pod/Log::Minimal#EXPORT-FUNCTIONS) (e.g. infof, warnf, and etc).
 
 # CONFIGURATIONS
 
-The configurable keys and its relations are follows (please see also [Log::Minimal](https://metacpan.org/pod/Log::Minimal) to get information of `$Log::Minimal::*`):
+The configurable keys and its relations are follows (please see also ["CUSTOMIZE" in Log::Minimal](https://metacpan.org/pod/Log::Minimal#CUSTOMIZE) to get information of `$Log::Minimal::*`):
 
 - color
 
-    `$Log::Minimal::COLOR`
+    `$Log::Minimal::COLOR` (default: 0)
 
 - autodump
 
-    `$Log::Minimal::AUTODUMP`
+    `$Log::Minimal::AUTODUMP` (default: 0)
 
 - trace\_level
 
-    `$Log::Minimal::TRACE_LEVEL`
+    `$Log::Minimal::TRACE_LEVEL` (default: 2)
 
 - log\_level
 
-    `$Log::Minimal::LOG_LEVEL`
+    `$Log::Minimal::LOG_LEVEL` (default: 'DEBUG')
 
 - escape\_whitespace
 
-    `$Log::Minimal::ESCAPE_WHITESPACE`
+    `$Log::Minimal::ESCAPE_WHITESPACE` (default: 0)
 
 - print
 
