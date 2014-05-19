@@ -25,7 +25,7 @@ subtest 'Methods of Log::Minimal should work well' => sub {
     like $@, qr!\A\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2} \[ERROR] foobar at t/01_basic\.t line \d+\n\Z!;
 
     eval { $logger->croakff("foobar") };
-    like $@, qr!\A\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2} \[ERROR] foobar at .+ ,t/01_basic\.t line \d+\n\Z!;
+    like $@, qr!\A\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2} \[ERROR] foobar at .+[ ,][ ,]t/01_basic\.t line \d+\n\Z!;
 };
 
 subtest 'Undefined method of Log::Minimal should die' => sub {
