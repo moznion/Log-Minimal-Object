@@ -9,6 +9,7 @@ our $VERSION = "0.01";
 use constant {
     ORIGINAL_PRINT => $Log::Minimal::PRINT,
     ORIGINAL_DIE   => $Log::Minimal::DIE,
+    DEFAULT_TRACE_LEVEL => 2,
 };
 
 sub new {
@@ -21,7 +22,7 @@ sub new {
         die               => $args{die} || ORIGINAL_DIE,
         print             => $args{print} || ORIGINAL_PRINT,
         autodump          => $args{autodump} || 0,
-        trace_level       => $args{trace_level} || 2,
+        trace_level       => $args{trace_level} || DEFAULT_TRACE_LEVEL,
         log_level         => $args{log_level} || 'DEBUG',
         escape_whitespace => $args{escape_whitespace} || 0,
     }, $class;
@@ -117,7 +118,7 @@ C<$Log::Minimal::AUTODUMP> (default: 0)
 
 =item * trace_level
 
-C<$Log::Minimal::TRACE_LEVEL> (default: 2)
+C<$Log::Minimal::TRACE_LEVEL> (default: 2, this value is equal to C<Log::Minimal::Object::DEFAULT_TRACE_LEVEL>)
 
 =item * log_level
 
@@ -134,6 +135,19 @@ C<$Log::Minimal::PRINT>
 =item * die
 
 C<$Log::Minimal::DIE>
+
+=back
+
+=head1 PROVIDED CONSTANTS
+
+=over 4
+
+=item * Log::Minimal::Object::DEFAULT_TRACE_LEVEL
+
+Default C<trace_level> of this module.
+When you would like to control the trace level on the basis of this module, please use this value.
+
+For example: C<$logger-E<gt>{trace_level} = Log::Minimal::Object::DEFAULT_TRACE_LEVEL + 1>
 
 =back
 
