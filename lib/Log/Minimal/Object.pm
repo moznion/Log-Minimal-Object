@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Log::Minimal ();
 
-our $VERSION = "0.01";
+our $VERSION = "0.02";
 
 use constant {
     ORIGINAL_PRINT => $Log::Minimal::PRINT,

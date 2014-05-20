@@ -48,7 +48,7 @@ The configurable keys and its relations are follows (please see also ["CUSTOMIZE
 
 - trace\_level
 
-    `$Log::Minimal::TRACE_LEVEL` (default: 2)
+    `$Log::Minimal::TRACE_LEVEL` (default: 2, this value is equal to `Log::Minimal::Object::DEFAULT_TRACE_LEVEL`)
 
 - log\_level
 
@@ -65,6 +65,15 @@ The configurable keys and its relations are follows (please see also ["CUSTOMIZE
 - die
 
     `$Log::Minimal::DIE`
+
+# PROVIDED CONSTANTS
+
+- Log::Minimal::Object::DEFAULT\_TRACE\_LEVEL
+
+    Default `trace_level` of this module.
+    When you would like to control the trace level on the basis of this module, please use this value.
+
+    For example: `$logger->{trace_level} = Log::Minimal::Object::DEFAULT_TRACE_LEVEL + 1`
 
 # SEE ALSO
 
