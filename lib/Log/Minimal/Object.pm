@@ -60,6 +60,8 @@ __END__
 
 =encoding utf-8
 
+=for stopwords configurable infof warnf autodump Log::Minimal::Object->new(%arg | \%arg)
+
 =head1 NAME
 
 Log::Minimal::Object - Provides the OOP interface of Log::Minimal
