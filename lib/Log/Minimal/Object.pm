@@ -78,7 +78,7 @@ Log::Minimal::Object - Provides the OOP interface of Log::Minimal
 
 Log::Minimal::Object is the simple wrapper to provide the OOP interface of L<Log::Minimal>.
 
-This module can have and apply independent settings for each instance, it's intuitive!
+This module can have and apply independent customize settings for each instance, it's intuitive!
 
 =head1 CLASS METHODS
 
